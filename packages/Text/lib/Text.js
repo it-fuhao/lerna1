@@ -3,5 +3,5 @@
 module.exports = text;
 
 function text() {
-    // TODO 2
+    console.log(123);
 }
