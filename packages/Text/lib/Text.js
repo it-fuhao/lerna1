@@ -3,5 +3,5 @@
 module.exports = text;
 
 function text() {
-    console.log(123);
+    console.log(1234);
 }
