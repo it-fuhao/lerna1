@@ -3,5 +3,5 @@
 module.exports = text;
 
 function text() {
-    // TODO 123123123
+    // TODO
 }
