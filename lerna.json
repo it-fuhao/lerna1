@@ -1,9 +1,21 @@
 {
-  "version": "1.0.0",
+  "version": "independent",
   "private": true,
   "packages": [
     "packages/*"
   ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ]
+    },
+    "bootstrap": {
+      "ignore": "component-*",
+      "npmClientArgs": ["--no-package-lock"]      
+    }
+  },
   "useWorkspaces": true,
   "npmClient": "yarn"
 }

@@ -1,3 +1,3 @@
 export const withInstall = () => {
-  return 'withInstall'
+  return 'withInstall2'
 }

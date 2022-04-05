@@ -23,5 +23,6 @@
   "dependencies": {
     "@lerna1/Text": "^1.0.0",
     "@lerna1/utils": "^1.0.0"
-  }
+  },
+  "gitHead": "5b783c8e17a3051cf33ca592c76482aa32ce8728"
 }
