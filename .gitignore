@@ -12,8 +12,6 @@ package-lock.json
 **/test/coverage
 
 # dist file
-es
-lib
 dist
 vetur
 **/site-dist
