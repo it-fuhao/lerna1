@@ -18,7 +18,8 @@
     "lib"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "node ../../command/build.js package=Text"
   },
   "gitHead": "446fa819af1387cb2dc89890732aeb1ac710ce90"
 }
