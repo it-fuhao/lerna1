@@ -12,7 +12,7 @@ https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/abo
 - npm login
 开发者可能使用了淘宝镜像源，无法登录npm
 1. 使用 > npm login --registry https://registry.npmjs.org
-2. 切换淘宝镜像为npm官方
+2. 切换淘宝镜像为npm官方 npm config set registry https://registry.npmjs.org
 
 - lerna publish 
 检测改动过的包，依次发布
