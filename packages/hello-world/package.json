@@ -13,5 +13,8 @@
   },
   "scripts": {
     "build": "ts-node ../../command/build.ts package=hello-world"
+  },
+  "devDependencies": {
+    "@lerna1/utils": "1.0.8"
   }
 }
