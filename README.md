@@ -18,6 +18,9 @@ https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/abo
 - utils构建
 - ts集成
 
+-qs
+1. 构建时排除组件依赖？
+
 ## 发布相关
 
 - npm login √
