@@ -13,7 +13,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "ts-node ../../command/build.ts package=hello-world"
+    "build": "node ../../command/build.js package=hello-world"
   },
   "dependencies": {
     "@lerna1/utils": "^1.0.9"

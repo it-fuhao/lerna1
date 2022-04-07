@@ -1,9 +1,14 @@
 
-import path from "path";
-import { defineConfig, build } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
-import dts from "vite-plugin-dts";
+// import path from "path";
+// import { defineConfig, build } from "vite";
+// import vue from "@vitejs/plugin-vue";
+// import vueJsx from "@vitejs/plugin-vue-jsx";
+// import dts from "vite-plugin-dts";
+const path = require("path");
+const { defineConfig, build } = require("vite");
+const vue = require("@vitejs/plugin-vue");
+const vueJsx = require("@vitejs/plugin-vue-jsx")
+const dts = require("vite-plugin-dts")
 
 const outputDir = "dist"; // 构建产物文件夹名称
 
@@ -20,7 +25,7 @@ const outDir = path.resolve(__dirname, `../packages/${packageName}/${outputDir}`
 console.log("outDir", outDir);
 // vite基础配置
 const baseConfig = defineConfig({
-  // configFile: false,
+  configFile: false,
   publicDir: false,
   plugins: [
     vue(), 
@@ -49,7 +54,7 @@ const buildAll = async () => {
   await build({
     ...baseConfig,
     build: {
-      // rollupOptions,
+      rollupOptions,
       lib: {
         entry: path.resolve(entryDir, 'index.ts'),
         name: packageName, // umd的变量名
