@@ -1,6 +1,6 @@
 {
   "name": "@lerna1/button",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "> TODO: description",
   "author": "fuhao1px <fuhao1px@163.com>",
   "homepage": "",
@@ -22,8 +22,8 @@
     "build": "node ../../command/build.js package=Button"
   },
   "dependencies": {
-    "@lerna1/text": "^1.0.7",
-    "@lerna1/utils": "^1.0.6"
+    "@lerna1/text": "^1.0.8",
+    "@lerna1/utils": "^1.0.7"
   },
   "gitHead": "992c3bd45007fccd523031334fe768cec1aa5f1d"
 }
