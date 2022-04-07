@@ -2,6 +2,10 @@
 ## start 
 > yarn install
 
+## 开发
+> npm run create
+创建组件工作区
+
 - lerna 
 lerna : 无法加载文件，系统策略禁止运行脚本
 使用管理员身份运行powershell  > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned

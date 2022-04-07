@@ -1,3 +1,1 @@
-export const withInstall = () => {
-  return 'withInstall4'
-}
+export * from './lib'

@@ -1,66 +1,92 @@
     
 import fs from "fs-extra";
-import path from "path";
 import chalk from "chalk";
 import symbols from "log-symbols";
+import inquirer from "inquirer";
+import { componentNameValidateFn } from "./validate.js";
+import { templatePath, componentTargetPath } from "./path.js";
 
-console.log(symbols.success, chalk.green("开始创建..........,请稍候"));
+// 输入内容
+const promptList = [
+  {
+    type: "input",
+    message: "请输入组件名称（小写，以-分隔）:",
+    name: "componentName",
+    validate: componentNameValidateFn, // 校验函数
+  }
+]
+// 收集组件信息
+const answer = await inquirer.prompt(promptList);
+console.log(answer);
 
-// 拿到命令行的参数去生成对应的文件
-// 拿到命令行输入的模块名
-const moduleName = process.argv[2];
-// 默认模版目录
-const componentModulePath = path.resolve(
-  "./template"
-); // 生成pages里的component
-const assetsModulePath = path.resolve("./assets");
-const localeModulePath = path.resolve("./locales");
-// 输出的目标目录
-const componentTargetPath = path.resolve("src/views"); // 对应输出的目标文件
-const assetsTargetPath = path.resolve("src/assets");
-const localeTargetPath = path.resolve("src/locales");
-    
-    // @param componentModulePath(要拷贝的模版路径)
-    // @param componentTargetPath(输出的目标路径)
-    // @param moduleNme(命令行拿到的 模块名)
-    // createComponent(componentModulePath, componentTargetPath, moduleName);
-    // createComponent(assetsModulePath, assetsTargetPath, moduleName);
-    // createComponent(localeModulePath, localeTargetPath, moduleName);
-    
-    const createComponent = (demoPath, targetpath, name) => {
-      console.log(symbols.success, chalk.green("开始创建..........,请稍候"));
-      fs.copy(demoPath, `${targetpath}/${name}`) // 拷贝模板文件到目标目录
-        .then(() => {
-          reWrite(`${targetpath}/${name}`, name); // 生成文件
-          console.log(symbols.success, chalk.green("创建成功"));
-        })
-        .catch(err => {
-          console.log(symbols.error, chalk.red("创建失败", err));
-        });
-    }
-    
-    const reWrite = (path, name) => {
-      const files = fs.readdirSync(path);
-      files.forEach(file => {
-        const fileName = `${path}/${file}`;
-        if (fs.statSync(fileName).isFile()) {
-          const content = fs.readFileSync(fileName).toString();
-          // 创建子级组件XXX/yy,截取yy
-          const demoName = name.split("/").reverse()[0];
-          // 截取组件名-, 则写入的组件名采用大驼峰
-          const result = content.replace(/template/g, stringToCamel(demoName));
-          fs.writeFileSync(fileName, result);
-        } else {
-          reWrite(fileName, name);
-        }
-      });
-    };
-    
-    // 将字符串转化成大驼峰
-    const stringToCamel = str => {
-      let temp = str.split("-");
-      for (let i = 0; i < temp.length; i++) {
-        temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
+// console.log(symbols.success, chalk.green("开始创建..........,请稍候"));
+
+/**
+ * 创建组件工作区
+ * @param {String} templatePath 模板路径
+ * @param {String} targetpath 目标路径
+ * @param {String} name 组件名称
+ * @returns 
+ */
+const createComponent = async (templatePath, targetpath, name) => {
+  console.log(chalk.green("开始创建，请稍候..."));
+  const targetComponentDir = `${targetpath}/${name}`;
+  // 拷贝模板
+  try {
+    await fs.copy(templatePath, targetComponentDir);
+  } catch (error) {
+    console.log(symbols.error, chalk.red("拷贝文件失败", error));
+    return;
+  }
+  // 改些模板，生成组件工作区文件
+  await reWriteFile(targetComponentDir, name); // 生成文件
+  console.log(symbols.success, chalk.green("组件工作区创建完毕！"));
+}
+
+/**
+ * 重写组件工作区文件
+ * @param {*} path 组件工作区文件路径
+ * @param {*} name 组件名称
+ */
+const reWriteFile = async (path, name) => {
+  const files = await fs.readdir(path);
+  for (const file of files) {
+    const fileName = `${path}/${file}`; // 模板文件路径
+    if (fs.statSync(fileName).isFile()) {
+      // 修改文件名后缀
+      let newFileName = fileName;
+      if (fileName.endsWith(".tpl")) {
+        newFileName = fileName.replace(/.tpl/g, "");
+        await fs.rename(fileName, newFileName);
       }
-      return temp.join("");
-    };
+      console.log(`${newFileName} 创建成功`);
+      const result = renderFileWithPrompt(newFileName);
+      fs.writeFileSync(newFileName, result);
+    } else {
+      // 文件夹，递归
+      await reWriteFile(fileName, name);
+    }
+  }
+};
+
+/**
+ * 根据录入项和模板文件，渲染文件
+ * @param {String} filePath 文件路径
+ * @returns 
+ */
+const renderFileWithPrompt = (filePath) => {
+  // 根据录入项，渲染文件
+  let content = fs.readFileSync(filePath).toString();
+  promptList.forEach(prompt => {
+    const { name } = prompt;
+    const val = answer[name];
+    const reg = new RegExp(`{{ ${name} }}`, "g");
+    content = content.replace(reg, val);
+  })
+  return content;
+}
+
+// 构建
+createComponent(templatePath, componentTargetPath, answer.componentName);
+    
+

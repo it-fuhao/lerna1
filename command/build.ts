@@ -1,13 +1,15 @@
-// bin/build.js
-// node包，commonjs规范
-const path = require('path')
-const { defineConfig, build } = require('vite')
-const vue = require('@vitejs/plugin-vue') 
-const vueJsx = require('@vitejs/plugin-vue-jsx')
+
+import path from "path";
+import { defineConfig, build } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import dts from "vite-plugin-dts";
 
 const outputDir = "dist"; // 构建产物文件夹名称
 
 // 打包的入口文件
+console.log(1, __dirname);
+console.log(path.resolve(__dirname));
 console.log(path.resolve(__dirname, '../packages'));
 console.log(process.argv);
 const packageName = process.argv[2].split("=")[1];
@@ -18,9 +20,16 @@ const outDir = path.resolve(__dirname, `../packages/${packageName}/${outputDir}`
 console.log("outDir", outDir);
 // vite基础配置
 const baseConfig = defineConfig({
-  configFile: false,
+  // configFile: false,
   publicDir: false,
-  plugins: [vue(), vueJsx()]
+  plugins: [
+    vue(), 
+    vueJsx(),
+    dts({
+      insertTypesEntry: true,
+      copyDtsFiles: false,
+    }),
+  ]
 })
 // rollup配置
 const rollupOptions = {
@@ -40,7 +49,7 @@ const buildAll = async () => {
   await build({
     ...baseConfig,
     build: {
-      rollupOptions,
+      // rollupOptions,
       lib: {
         entry: path.resolve(entryDir, 'index.ts'),
         name: packageName, // umd的变量名
@@ -48,7 +57,7 @@ const buildAll = async () => {
         formats: ['es', 'umd'],
       },
       outDir
-    }
+    },
   })
 }
 const buildComponent = async () => {
