@@ -18,8 +18,10 @@ https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/abo
 - utils构建
 - ts集成
 
--qs
+- Qs
 1. 构建时排除组件依赖？
+2. 组件库发版后，业务端项目yarn install也无法获取到最新的包，需要yarn upgrade更新
+
 
 ## 发布相关
 
