@@ -7,6 +7,8 @@
   "type": "module",
   "scripts": {
     "create": "node ./command/create.js",
+    "dev": "cd play && vite --host",
+    "build": "cd play && vite build",
     "build:all": "lerna run build"
   },
   "devDependencies": {
