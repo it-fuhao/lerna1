@@ -10,16 +10,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import dts from "vite-plugin-dts";
 
 const outputDir = "dist"; // 构建产物文件夹名称
-// const __dirname = path.resolve();
 
 // 打包的入口文件
-// console.log(1, __dirname);
-// console.log(path.resolve(__dirname));
-// console.log(path.resolve('./packages'));
-// console.log(path.resolve(__dirname, './packages'));
-console.log(process.argv);
-console.log(process.cwd());
-console.log(path.resolve("./"));
 const packageName = process.argv[2].split("=")[1];
 const entryDir = path.resolve("./");
 console.log(entryDir);

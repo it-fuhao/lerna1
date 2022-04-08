@@ -37,3 +37,7 @@ https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/abo
 
 ## 模板策略
 新建业务组件时，需要通过命令行执行自动根据template模板创建多个文件 (package.json index.ts ...) TODO
+
+
+## CHANGELOG
+- 采用 `conventional-changelog` 来做团队内开发维护组件库的版本记录
