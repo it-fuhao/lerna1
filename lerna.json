@@ -13,7 +13,6 @@
         "*.md"
       ],
       "conventionalCommits": true,
-      "message": "chore(release): publish",
       "exact": true
     },
     "bootstrap": {

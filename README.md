@@ -40,4 +40,4 @@ https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/abo
 
 
 ## CHANGELOG
-- 采用 `conventional-changelog` 来做团队内开发维护组件库的版本记录
+- 目前依赖lerna自动生成CHANGELOG.md，后续引入git commit-msg规范来生成
