@@ -8,7 +8,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: "HelloWorld",
   setup() {
-    const msg = ref(10);
+    const msg = ref(100);
     return {
       msg
     }
