@@ -26,3 +26,4 @@ export const withInstall = <T, E extends Record<string, any>>(
 }
 
 export const a = 1;
+export const b = 2;
