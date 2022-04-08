@@ -5,7 +5,9 @@
   "author": "fuhao1px <fuhao1px@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "index.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,8 +20,7 @@
     "lib"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "ts-node ../../command/build.ts package=utils"
+    "build": "node ../../command/build.js package=utils"
   },
   "gitHead": "992c3bd45007fccd523031334fe768cec1aa5f1d"
 }
