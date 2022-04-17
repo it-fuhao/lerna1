@@ -982,6 +982,18 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
+"@lerna1/hello-world@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@lerna1/hello-world/-/hello-world-1.0.11.tgz#f63059d8efbf1f3515d0e28f393dff9caa7fd26e"
+  integrity sha512-6OOEyqaAdUKav+B0iio3i+GE1n3Q3+KU82Dyt04Naa5zXW+3hDf5s9RmgCUXQjNALk/kXwsWXs1EqoYWGSzxBw==
+  dependencies:
+    "@lerna1/utils" "1.0.13"
+
+"@lerna1/utils@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@lerna1/utils/-/utils-1.0.13.tgz#a69834d4fc04362672f008e67778fbce6f93f20a"
+  integrity sha512-IEErhkviDDTgBZj6jMbPRjgqUP0FgQyXyKpPoPmaRY7Xza8vT/LZzgGHZ+vgb+HEz+XUtNGcYOSyWj6iZdH7lw==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
