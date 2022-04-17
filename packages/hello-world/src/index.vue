@@ -1,10 +1,12 @@
 <template>
   <div>
     <p>{{ msg }}</p>
+    <van-button>按钮</van-button>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { Button } from 'vant'
 export default defineComponent({
   name: "HelloWorld",
   setup() {

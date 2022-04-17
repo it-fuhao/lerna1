@@ -26,5 +26,8 @@
     "vite-plugin-dts": "^1.0.5",
     "vue": "^3.2.31",
     "vue-tsc": "^0.29.8"
+  },
+  "dependencies": {
+    "vant": "^3.4.8"
   }
 }
