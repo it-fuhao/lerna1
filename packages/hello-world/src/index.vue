@@ -9,8 +9,11 @@ import { defineComponent, ref } from 'vue';
 import { Button } from 'vant'
 export default defineComponent({
   name: "HelloWorld",
+  components: {
+    [Button.name]: Button
+  },
   setup() {
-    const msg = ref(10064);
+    const msg = ref(10065);
     return {
       msg
     }
