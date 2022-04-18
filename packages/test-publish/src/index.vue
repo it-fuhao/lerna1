@@ -13,7 +13,7 @@ export default defineComponent({
     [Button.name]: Button
   },
   setup() {
-    const msg = ref(10065);
+    const msg = ref(10);
     return {
       msg
     }

@@ -10,7 +10,7 @@
     "dev": "cd play && vite --host",
     "build": "cd play && vite build",
     "build:all": "lerna run build",
-    "postpack": "lerna run build"
+    "prepack": "lerna run build"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
