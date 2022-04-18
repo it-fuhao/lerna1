@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ msg }}</p>
-    <van-button>按钮5</van-button>
+    <van-button>按钮6</van-button>
   </div>
 </template>
 <script lang="ts">
