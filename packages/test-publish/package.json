@@ -8,7 +8,9 @@
   "main": "index.ts",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "directory": "dist",
+    "prepublish": "node ./a.js"
   },
   "scripts": {
     "build": "node ../../command/build.js package=test-publish"
