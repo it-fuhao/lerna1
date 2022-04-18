@@ -63,6 +63,31 @@ const buildAll = async () => {
   })
 }
 
+// 每个组件单独生成自己的package.json
+const createPackageJson = async (name) => {
+  const packageJsonOutDir = path.resolve(outDir, 'package.json');
+  await fs.copy(path.resolve(entryDir, 'package.json'), packageJsonOutDir);
+  let packageJson = await fs.readJson(packageJsonOutDir);
+  packageJson.main = 'index.umd.js';
+  await fs.writeFile(packageJsonOutDir, JSON.stringify(packageJson, null, '\t')); // 美观
+  // a["main"] = 'index.umd.js';
+  // const fileStr = `
+  //   {
+  //     "name": "@my/${name}",
+  //     "main": "index.umd.js",
+  //     "module": "index.es.js",
+  //     "style": "styles.css"
+  //   }
+  // `
+  // // 输出package.json
+  // console.log(path.resolve(outDir, `./package.json`));
+  // fs.outputFile(
+  //   path.resolve(outDir, `./package.json`),
+  //   fileStr,
+  //   'utf-8'
+  // )
+}
+
 /**
  * 删除文件夹
  * @param {*} dir 需要删除的文件夹 
@@ -96,6 +121,7 @@ const buildComponent = async () => {
   await removeDir(outDir);
   // 开始构建
   await buildAll();
+  await createPackageJson("123");
   console.log(symbols.success, chalk.green(`${packageName}构建成功！`));
 }
 
