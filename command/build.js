@@ -63,29 +63,26 @@ const buildAll = async () => {
   })
 }
 
-// 每个组件单独生成自己的package.json
-const createPackageJson = async (name) => {
+/**
+ * 打包后的组件生成自己的package.json
+ * @param {String} entryDir 打包入口文件
+ * @param {String} outDir 打包出口文件
+ */
+const createPackageJson = async (entryDir, outDir) => {
+  // 定义工作区描述文件路径
+  const packageEntryDir = path.resolve(entryDir, 'package.json');
+  // 定义输出package.json的路径
   const packageJsonOutDir = path.resolve(outDir, 'package.json');
-  await fs.copy(path.resolve(entryDir, 'package.json'), packageJsonOutDir);
+  // 将组件工作区的描述文件，copy到dist目录下
+  await fs.copy(packageEntryDir, packageJsonOutDir);
+  // 修改dist下描述文件信息，
   let packageJson = await fs.readJson(packageJsonOutDir);
   packageJson.main = 'index.umd.js';
-  await fs.writeFile(packageJsonOutDir, JSON.stringify(packageJson, null, '\t')); // 美观
-  // a["main"] = 'index.umd.js';
-  // const fileStr = `
-  //   {
-  //     "name": "@my/${name}",
-  //     "main": "index.umd.js",
-  //     "module": "index.es.js",
-  //     "style": "styles.css"
-  //   }
-  // `
-  // // 输出package.json
-  // console.log(path.resolve(outDir, `./package.json`));
-  // fs.outputFile(
-  //   path.resolve(outDir, `./package.json`),
-  //   fileStr,
-  //   'utf-8'
-  // )
+  packageJson.module = 'index.es.js';
+  packageJson.types = 'index.d.ts';
+  // 写入文件保留格式化，方便阅读
+  const content = JSON.stringify(packageJson, null, '\t');
+  await fs.writeFile(packageJsonOutDir, content);
 }
 
 /**
@@ -121,7 +118,8 @@ const buildComponent = async () => {
   await removeDir(outDir);
   // 开始构建
   await buildAll();
-  await createPackageJson("123");
+  // 创建依赖包package.json
+  await createPackageJson(entryDir, outDir);
   console.log(symbols.success, chalk.green(`${packageName}构建成功！`));
 }
 
